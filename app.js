@@ -2,8 +2,20 @@ const confi = require('./config.js');
 const request = require('request');
 const yargs = require('yargs');
 
-var location = '1301 lombard street philadelphia';
+const argv = yargs
+    .options({
+        address: {
+            demand: true,
+            alias: 'a',
+            describe: 'Address to fetch weather',
+            string: true
+        }
+})
+.help()
+.alias('help', 'h')
+.argv;
 
+var location = argv.address;
 request({url: `https://maps.googleapis.com/maps/api/geocode/json?key=${confi.config.MY_KEY}&address=${location}` , 
 json: true
 }, (error, response, body) => {
