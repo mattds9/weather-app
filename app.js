@@ -1,6 +1,6 @@
-const confi = require('./config.js');
-const request = require('request');
 const yargs = require('yargs');
+
+const geocode = require('./geocode/geocode.js');
 
 const argv = yargs
     .options({
@@ -15,13 +15,4 @@ const argv = yargs
 .alias('help', 'h')
 .argv;
 
-var location = argv.address;
-request({url: `https://maps.googleapis.com/maps/api/geocode/json?key=${confi.config.MY_KEY}&address=${location}` , 
-json: true
-}, (error, response, body) => {
-        // console.log(JSON.stringify(body, undefined, 2));
-        // console.log(JSON.stringify(response, undefined, 2));
-        // console.log(JSON.stringify(error, undefined, 2));
-        console.log(body.results[0].formatted_address);
-        console.log(body.results[0].geometry.location);
-});
+geocode.geocodeAddress(argv.address);
