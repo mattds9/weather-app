@@ -28,7 +28,13 @@ geocode.geocodeAddress(argv.address, (errorMessage, results) => {
     if(errorMessage){
         console.log(errorMessage);
     } else {
-        console.log(JSON.stringify(results, undefined, 2));
-        weather.latlngTemperature(results.lat, results.lng, cback);
+        console.log(results.address);
+        weather.latlngTemperature(results.lat, results.lng, (errorMessage, results) => {
+            if(errorMessage){
+                console.log(errorMessage);
+            } else {
+                console.log(`It is currently: ${results.temperature} degrees Celcius. It feels like: ${results.apparentTemperature} degrees Celcius`);
+            }
+        });
     }
 });
