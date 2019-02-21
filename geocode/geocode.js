@@ -2,7 +2,7 @@ const confi = require('../config.js');
 const request = require('request');
 
 var geocodeAddress = (address) => {
-    request({url: `https://maps.googleapis.com/maps/api/geocode/json?key=${confi.config.MY_KEY}&address=${address}` , 
+    request({url: `https://maps.googleapis.com/maps/api/geocode/json?key=${confi.config.GOOGLE_MAPS_API_KEY}&address=${address}` , 
     json: true
     }, (error, response, body) => {
             // console.log(JSON.stringify(body, undefined, 2));
